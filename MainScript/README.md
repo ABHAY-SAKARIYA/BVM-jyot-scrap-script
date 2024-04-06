@@ -12,11 +12,10 @@
 
 ### Requirements / Dependencies
 
-- selenium
-- beautifulsoup4
-- aiohttp
-- asyncio
-- pydrive
+- aiohttp==3.9.1
+- beautifulsoup4==4.12.2
+- PyDrive==1.3.1
+- selenium==4.16.0
 
 
 ### User inputs 
