@@ -43,7 +43,7 @@ class DownloadPdfs:
 
         
         try:
-            with open(fr"{File_Path}\tempFinal.json","r") as read:
+            with open(fr"{File_Path}\temp\tempFinal.json","r") as read:
                 df = json.load(read)
             
 

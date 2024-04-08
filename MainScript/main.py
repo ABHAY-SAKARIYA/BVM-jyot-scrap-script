@@ -22,7 +22,7 @@ class Main:
         self.GetUserInput()
 
         if self.webpage_url == "":
-            print("uploading Files to Drive.")
+            print("Last Step : uploading Files to Drive.")
 
             time.sleep(5)
 
@@ -30,9 +30,11 @@ class Main:
             dupload = DriveUploader(Path=self.downloadPath,FolderName=self.driveFolder_name)
             dupload.upload()
 
+            print("Files Uploaded TO Drive")
+
 
         elif "temp.json" in self.webpage_url:
-            print("Getting Download link from the Website this will take some time.")
+            print("Step 2: Getting Download link from the Website this will take some time.")
 
             time.sleep(5)
             
@@ -43,7 +45,7 @@ class Main:
 
             time.sleep(10)
 
-            print("Downloading Files from the website..")
+            print("Step 3: Downloading Files from the website..")
             # ----------------------------------BLOCK-----------------------------------
             downloading = DownloadPdfs(downloadPath=self.downloadPath)
             downloading.download()
@@ -51,14 +53,17 @@ class Main:
 
             time.sleep(10)
 
-            print("uploading Files to Drive.")
+            print("last Step : uploading Files to Drive.")
             # ----------------------------------BLOCK-----------------------------------
             dupload = DriveUploader(Path=self.downloadPath,FolderName=self.driveFolder_name)
             dupload.upload()
 
+            print("Files Uploaded TO Drive")
+
+
 
         elif "tempFinal.json" in self.webpage_url:
-            print("Downloading Files from the website..")
+            print("Step 3: Downloading Files from the website..")
             
             time.sleep(5)
             
@@ -69,14 +74,17 @@ class Main:
 
             time.sleep(10)
 
-            print("uploading Files to Drive.")
+            print("Last Step : uploading Files to Drive.")
             # ----------------------------------BLOCK-----------------------------------
             dupload = DriveUploader(Path=self.downloadPath,FolderName=self.driveFolder_name)
             dupload.upload()
 
+            print("Files Uploaded TO Drive")
+
+
         else:
 
-            print("Running Program this will take some time Do Not Close this until all finished")
+            print("Step 1: Running Program this will take some time Do Not Close this until all finished")
             
             time.sleep(5)
             
@@ -97,7 +105,7 @@ class Main:
 
             time.sleep(10)
 
-            print("Getting Download link from the Website this will take some time.")
+            print("Step 2: Getting Download link from the Website this will take some time.")
             # ----------------------------------BLOCK-----------------------------------
             asyncrun = AsyncRun()
             asyncrun.run()
@@ -105,7 +113,7 @@ class Main:
 
             time.sleep(10)
 
-            print("Downloading Files from the website..")
+            print("Step 3: Downloading Files from the website..")
             # ----------------------------------BLOCK-----------------------------------
             downloading = DownloadPdfs(downloadPath=self.downloadPath)
             downloading.download()
@@ -113,10 +121,13 @@ class Main:
 
             time.sleep(10)
 
-            print("uploading Files to Drive.")
+            print("Last Step: uploading Files to Drive.")
             # ----------------------------------BLOCK-----------------------------------
             dupload = DriveUploader(Path=self.downloadPath,FolderName=self.driveFolder_name)
             dupload.upload()
+
+            print("Files Uploaded TO Drive")
+
 
        
 

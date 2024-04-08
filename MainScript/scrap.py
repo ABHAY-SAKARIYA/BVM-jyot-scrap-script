@@ -33,7 +33,7 @@ class BVMScraper:
             parser = BeautifulSoup(driver.page_source,"html.parser")
             
             for table in parser.select(".table"):
-                with open(fr"{File_Path}\temp.html", "a") as writefile:
+                with open(fr"{File_Path}\temp\temp.html", "a") as writefile:
                     writefile.write(table.prettify())
                 # print("table for loop")
 
@@ -55,7 +55,7 @@ class BVMScraper:
         '''
         try:
 
-            with open(fr"{File_Path}\temp.html", "r") as read:
+            with open(fr"{File_Path}\temp\temp.html", "r") as read:
                 data = read.read()
 
             parser = BeautifulSoup(data,"html.parser")
@@ -70,7 +70,7 @@ class BVMScraper:
             for d in parser.select(".table tbody tr td:nth-child(2)"):
                 Data["Date"].append("".join(d.text.split()))
 
-            with open(fr"{File_Path}\temp.json", "a") as write:
+            with open(fr"{File_Path}\temp\temp.json", "a") as write:
                 write.write(json.dumps(Data, indent=4))
 
             return True

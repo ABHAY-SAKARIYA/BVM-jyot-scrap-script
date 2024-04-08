@@ -66,7 +66,7 @@ class AsyncRun:
     def run(self) -> None:
 
         try:
-            with open(fr"{File_Path}\temp.json","r") as read:
+            with open(fr"{File_Path}\temp\temp.json","r") as read:
                 data = json.load(read)
 
             maxscrapecountatonce = 1000
@@ -92,7 +92,7 @@ class AsyncRun:
 
 
                 # print(newData["DownloadLink"],newData["Pdfname"])
-                with open(fr"{File_Path}\tempFinal.json","a") as write:
+                with open(fr"{File_Path}\temp\tempFinal.json","a") as write:
                     write.write(json.dumps(newData,indent=4))
         except Exception as e:
             print(e)
