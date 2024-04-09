@@ -1,6 +1,7 @@
 from scrap import BVMScraper
 from asyncApp import AsyncRun
 from download import DownloadPdfs
+from createExcel import createExcel
 from driveUpload import DriveUploader
 import time
 import os
@@ -13,6 +14,8 @@ class Main:
 
     def GetUserInput(self) -> None:
         self.webpage_url = input("Enter The Url: ")
+        if self.webpage_url == "excel":
+            return
         self.downloadPath = input("Enter The Download Path: ")
         self.driveFolder_name = input("Enter The Google Drive Folder Name To upload Data: ")
 
@@ -21,7 +24,17 @@ class Main:
 
         self.GetUserInput()
 
-        if self.webpage_url == "":
+        if self.webpage_url == "excel":
+            print("Saving Excel File.")
+            # ----------------------------------BLOCK-----------------------------------
+
+            excel = createExcel()
+            excel.create()
+            print("Saved succesfull")
+
+            # --------------------------------------------------------------------------
+
+        elif self.webpage_url == "":
             print("Last Step : uploading Files to Drive.")
 
             time.sleep(5)
@@ -31,6 +44,17 @@ class Main:
             dupload.upload()
 
             print("Files Uploaded TO Drive")
+
+            time.sleep(10)
+
+            print("Saving Excel File.")
+            # ----------------------------------BLOCK-----------------------------------
+
+            excel = createExcel()
+            excel.create()
+            print("Saved succesfull")
+
+            # --------------------------------------------------------------------------
 
 
         elif "temp.json" in self.webpage_url:
@@ -60,6 +84,17 @@ class Main:
 
             print("Files Uploaded TO Drive")
 
+            time.sleep(10)
+
+            print("Saving Excel File.")
+            # ----------------------------------BLOCK-----------------------------------
+
+            excel = createExcel()
+            excel.create()
+            print("Saved succesfull")
+
+            # --------------------------------------------------------------------------
+
 
 
         elif "tempFinal.json" in self.webpage_url:
@@ -80,6 +115,17 @@ class Main:
             dupload.upload()
 
             print("Files Uploaded TO Drive")
+
+            time.sleep(10)
+
+            print("Saving Excel File.")
+            # ----------------------------------BLOCK-----------------------------------
+
+            excel = createExcel()
+            excel.create()
+            print("Saved succesfull")
+
+            # --------------------------------------------------------------------------
 
 
         else:
@@ -127,7 +173,17 @@ class Main:
             dupload.upload()
 
             print("Files Uploaded TO Drive")
+            # --------------------------------------------------------------------------
+            time.sleep(10)
 
+            print("Saving Excel File.")
+            # ----------------------------------BLOCK-----------------------------------
+
+            excel = createExcel(url=self.webpage_url)
+            excel.create()
+            print("Saved succesfull")
+
+            # --------------------------------------------------------------------------
 
        
 

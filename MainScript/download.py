@@ -10,6 +10,7 @@ class DownloadPdfs:
 
     def __init__(self, downloadPath: str) -> None:
        self.downloadPath = downloadPath
+       self.filenameList = []
 
     def download_file(self,url : str, destination: str) -> bool:
         '''
@@ -93,6 +94,8 @@ class DownloadPdfs:
                         file_name = f"{newDate}_{pdfname}"
 
 
+                self.filenameList.append(file_name)
+
                 destination = os.path.join(self.downloadPath, file_name)  # Destination directory
                 # print(destination)
                 # break
@@ -124,9 +127,12 @@ class DownloadPdfs:
                 downlaodCount += 1
 
             print("Downloads complete!")
+            with open(fr"{File_Path}\temp\filename.json","a") as writefile:
+                writefile.write(json.dumps(self.filenameList,indent=4))
             return True
             
-        except:
+        except Exception as e:
+            print(e)
             return False
 
             

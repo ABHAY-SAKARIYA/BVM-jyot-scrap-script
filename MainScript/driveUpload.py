@@ -1,5 +1,7 @@
 from pydrive.drive import GoogleDrive 
 from pydrive.auth import GoogleAuth 
+from constant import File_Path
+import json
 
 # For using listdir() 
 import os 
@@ -26,6 +28,10 @@ class DriveUploader:
             self.drive = GoogleDrive(gauth) 
 
 
+            # Creating an list to store the urls of the uploaded files
+            Uploaded_url = []
+
+
             # Finding the folder in the drive..
             try:
                 file_list = self.drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
@@ -43,15 +49,25 @@ class DriveUploader:
             for x in os.listdir(self.path): 
 
                 try:
+                    # First Check if file already exists in drive if yes then do not upload them.
+                    file_exists = self.drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+
+
+                    # Create and upload drive file to drive
                     f = self.drive.CreateFile({'title': x}) 
                     f.SetContentFile(os.path.join(self.path, x)) 
                     f["parents"] = [{"id" : folder["id"]}]
-                    f.Upload() 
+                    f.Upload()
+                    Uploaded_url.append(f["alternateLink"])
+                    print(f["alternateLink"])
 
                     f = None
                 except Exception as e:
                     print(e)
                     continue
+
+            with open(rf"{File_Path}\temp\driveurl.json", "a") as writeFile:
+                writeFile.write(json.dumps(Uploaded_url,indent=4))
             
         except Exception as e:
             print(e)
