@@ -58,8 +58,8 @@ class createExcel:
             # Creating Datafram to save excel file
             df = pd.DataFrame(self.ExcelData)
             # Saving Excel Data
-            print(f"{File_Path}/ExcelSheets/{excelfilename[-1]}{fd}.xlsx")
-            df.to_excel(f"{File_Path}/ExcelSheets/{excelfilename}{fd}.xlsx")
+            print(f"{File_Path}/ExcelSheets/{excelfilename}_{fd}.xlsx")
+            df.to_excel(f"{File_Path}/ExcelSheets/{excelfilename}_{fd}.xlsx")
 
         except Exception as e:
             print(e)

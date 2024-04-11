@@ -1,4 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import json
 import os
@@ -8,10 +11,20 @@ from constant import File_Path
 class BVMScraper:
 
     def __init__(self,baseUrl) -> None:
-        self.baseUrl = baseUrl
-        d = "temp"
-        p = os.path.join(File_Path,d)
-        os.mkdir(p)
+        # Create an Temp Folder If not Exists
+        try:
+            self.baseUrl = baseUrl
+            d = "temp"
+            p = os.path.join(File_Path,d)
+            os.mkdir(p)
+        except:
+            # If Temp Folder Exists Delete All the other Files.
+            list_of_temp_files = ["temp.html","temp.json","tempFinal.json","filename.json","driveurl.json"]
+
+            for i in list_of_temp_files:
+                if os.path.exists(fr"{File_Path}\temp\{i}"):
+                    os.remove(fr"{File_Path}\temp\{i}")
+
 
 
     def getData(self) -> bool:
@@ -30,10 +43,13 @@ class BVMScraper:
 
             driver.get(self.baseUrl)
 
+            # Waiting till the table appears
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME,"table")))
+
             parser = BeautifulSoup(driver.page_source,"html.parser")
             
             for table in parser.select(".table"):
-                with open(fr"{File_Path}\temp\temp.html", "a") as writefile:
+                with open(fr"{File_Path}\temp\temp.html", "a",encoding="utf-8") as writefile:
                     writefile.write(table.prettify())
                 # print("table for loop")
 
@@ -55,7 +71,7 @@ class BVMScraper:
         '''
         try:
 
-            with open(fr"{File_Path}\temp\temp.html", "r") as read:
+            with open(fr"{File_Path}\temp\temp.html", "r", encoding="utf-8") as read:
                 data = read.read()
 
             parser = BeautifulSoup(data,"html.parser")

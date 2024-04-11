@@ -87,10 +87,12 @@ class DownloadPdfs:
 
                 # If the length of the file_name is more than 200 character then check if pdfname and title is same if yes then use only one among them now im using pdfname.. 
                 if len(file_name) >= 200:
-                    # this is only the pdfname but this is with removed special characters because title is wihtout specail characters, so that i can compare both title and pdfname
+                    # this is only the pdfname but this is with removed special characters because title is without specail characters, so that i can compare both title and pdfname
                     testPdfName = re.sub(r"[^a-zA-Z0-9\s\u0900-\u097F]","",df["Pdfname"][index])[0:-3]
                     # print(testPdfName)
                     if testPdfName == title:
+                        file_name = f"{newDate}_{pdfname}"
+                    else:
                         file_name = f"{newDate}_{pdfname}"
 
 
@@ -114,7 +116,7 @@ class DownloadPdfs:
                 if downlaodCount == breakcount:
                     print(F"Total {downlaodCount} Downloaded waiting for 10 sec before moving further!")
                     sleep(10)
-                    breakcount += 10
+                    breakcount += 50
 
 
 
