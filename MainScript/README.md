@@ -5,8 +5,9 @@
 - First this script will take the url of the website as an input from the user.
 - Then it will scrap the date, title and link of the page and save them to temp.html and then temp.json file.
 - Then from temp.json file it will get all the links and further scrap the details from each links like filename and downloadLink and save them to tempFinal.json file.
-- Then it will download the data using download.py code and save them to the folder named download.
-- Then all the downloaded pdf are further uploaded to google drive in the specific folder.
+- Then it will download the data using download.py code and save them to the folder which user defines and also create an filename.json file consists of all the pdfs filename require to create excel.
+- Then all the downloaded pdf are further uploaded to google drive in the specific folder which user defines and also create an driveUrl.json file consist of all the url of file which are uploaded to drive.
+- lastly create an excel file which includes columns like Title,Filename,WebsitePageLink,WebsitePdfLink,DriveLink.
 - Ends Here.
 
 
@@ -27,10 +28,11 @@
 
 ### Use Cases
 
-- If Url Consist of link to the website means perfomr all the operations.
+- If Url Consist of link to the website means perfome all the operations.
 - If Url is empty means only upload to google drive
 - if Url consist of temp.json file means scrap details from website from the link in json file and then download them and upload to drive.
 - If Url Consist of tempFinal.json means download the files and upload them to drive.
+- If url is equal to "excel" then only create an excel file takes data from the temp folder.
 
 
 ### File Wise Input Functions and Output
@@ -82,3 +84,12 @@
 
     - Functions: 
         - upload() -> bool
+
+
+* createExcel.py
+    - createExcel - class
+    - Input:
+        - url : str : None : Url of the website.
+
+    - Functions:
+        - create() -> None
