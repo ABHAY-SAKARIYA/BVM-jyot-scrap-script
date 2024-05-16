@@ -69,12 +69,12 @@ class AsyncRun:
             with open(fr"{File_Path}\temp\temp.json","r") as read:
                 data = json.load(read)
 
-            maxscrapecountatonce = 1000
+            maxscrapecountatonce = 100
 
             newData = {
-                "Date" : [x for x in data["Date"]],
-                "Titles" : [x for x in data["title"]],
-                "PageLinks" : [x for x in data["link"]],
+                "Date" : [],
+                "Titles" : [],
+                "PageLinks" : [],
                 "DownloadLink" : [],
                 "Pdfname" : []
             }
@@ -84,8 +84,20 @@ class AsyncRun:
             startCount = 0
             while startCount < endloop: 
                 downloadlink,pdfname = asyncio.run(self.main(startCount,data["link"],maxscrapecountatonce))
-                newData["DownloadLink"].extend(downloadlink)
-                newData["Pdfname"].extend(pdfname)
+                count = 0
+                for i in range(0,len(pdfname)):
+
+                    if (pdfname[i] in newData["Pdfname"] or downloadlink[i] in newData["DownloadLink"]):
+                        print(f"\n\nFound Duplicate FileName : {pdfname[i]} \nPdfLink is : {downloadlink[i]}\n")
+                        continue
+                    else:
+                        # print(data["title"][count])
+                        newData["DownloadLink"].append(downloadlink[i])
+                        newData["Pdfname"].append(pdfname[i])
+                        newData["Date"].append(data["Date"][count])
+                        newData["Titles"].append(data["title"][count])
+                        newData["PageLinks"].append(data["link"][count])
+                    count += 1
                 print(startCount)
                 startCount += maxscrapecountatonce
 

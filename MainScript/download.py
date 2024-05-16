@@ -80,9 +80,9 @@ class DownloadPdfs:
                 # Checking if title is empty or UNSPECIFIED if yes then the filename should be date_pdfname
                 # else date_title_pdfname
                 if title == "UNSPECIFIED" or title == " ":
-                    file_name = f"{newDate}_{pdfname}"
+                    file_name = f"{downlaodCount}_{newDate}_{pdfname}"
                 else:
-                    file_name = f"{newDate}_{title}_{pdfname}"
+                    file_name = f"{downlaodCount}_{newDate}_{title}_{pdfname}"
 
 
                 # If the length of the file_name is more than 200 character then check if pdfname and title is same if yes then use only one among them now im using pdfname.. 
@@ -91,9 +91,9 @@ class DownloadPdfs:
                     testPdfName = re.sub(r"[^a-zA-Z0-9\s\u0900-\u097F]","",df["Pdfname"][index])[0:-3]
                     # print(testPdfName)
                     if testPdfName == title:
-                        file_name = f"{newDate}_{pdfname}"
+                        file_name = f"{downlaodCount}_{newDate}_{pdfname}"
                     else:
-                        file_name = f"{newDate}_{pdfname}"
+                        file_name = f"{downlaodCount}_{newDate}_{pdfname}"
 
 
                 self.filenameList.append(file_name)
