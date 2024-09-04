@@ -69,7 +69,7 @@ class AsyncRun:
             with open(fr"{File_Path}\temp\temp.json","r") as read:
                 data = json.load(read)
 
-            maxscrapecountatonce = 100
+            maxscrapecountatonce = 1000
 
             newData = {
                 "Date" : [],

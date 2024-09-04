@@ -44,7 +44,7 @@ class BVMScraper:
             driver.get(self.baseUrl)
 
             # Waiting till the table appears
-            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME,"table")))
+            WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.CLASS_NAME,"table")))
 
             parser = BeautifulSoup(driver.page_source,"html.parser")
             
